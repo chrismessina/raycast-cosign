@@ -58,7 +58,7 @@
 | Action                                   | Shortcut                        | Description                                                               |
 | ---------------------------------------- | ------------------------------- | ------------------------------------------------------------------------- |
 | Add to Favorites / Remove from Favorites | `⇧ ⌘ F` (`⌘ ⏎` in My Favorites) | Star or unstar the selected person or company                             |
-| Toggle Sidebar                           | `⇧ ⌘ D`                         | Show or hide the profile sidebar in search results                        |
+| Show / Hide Sidebar                      | `⇧ ⌘ D`                         | Show or hide the profile sidebar in search results                        |
 | Show / Hide Description                  | `⇧ ⌘ Y`                         | Give the markdown description the whole pane by hiding the metadata table |
 
 Windows uses `Ctrl` in place of `⌘`.
