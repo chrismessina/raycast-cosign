@@ -37,7 +37,7 @@ export default function Command() {
       <List.Section title="People">{data?.people.map(row)}</List.Section>
       <List.Section title="Companies">{data?.organizations.map(row)}</List.Section>
       {empty ? (
-        error ? (
+        error && !data ? (
           <ErrorEmptyView title="Couldn't load favorites" error={error} retry={revalidate} />
         ) : (
           <List.EmptyView title="No favorites yet" description="Press ⌘⇧F on a person or company to add one." />
