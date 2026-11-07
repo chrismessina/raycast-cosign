@@ -39,8 +39,8 @@ Favorites live in two private Cosign lists, "Raycast Favorites: People" and "Ray
 (`src/lib/favorites.ts`). The list ids are cached in LocalStorage. People are removed by `nomineeId`; a company entry
 is removed by the list entry's wrapper `nominee.nomineeId`, not by `organizationId`. Cosign refuses investing firms
 in the companies list. A company entry's `nominee.imageUrl` is a blank `kind=person` image, so the row builds its logo with `organizationImage()`.
-A failed read or write forgets a cached list id only when `read_list` answers null for it (the list was deleted on
-the web); a rate limit or a network error keeps it. Sign out (`src/sign-out.tsx`) clears the tokens, the list ids, recent searches and the cached Cosign results on disk, then redraws the menu bar; view settings stay.
+A cached list id is forgotten only when `read_list` answers null for it (the list was deleted on the web): `readList`
+then looks the list up again, and a failed write checks once. A rate limit or a network error keeps it. Sign out (`src/sign-out.tsx`) clears the tokens, the list ids, recent searches and the cached Cosign results on disk, then redraws the menu bar; view settings stay.
 
 ## UI conventions
 
