@@ -38,7 +38,9 @@ and ordinary favorite writes spend neither AI pool. Searches stay explicit (Ente
 Favorites live in two private Cosign lists, "Raycast Favorites: People" and "Raycast Favorites: Companies"
 (`src/lib/favorites.ts`). The list ids are cached in LocalStorage. People are removed by `nomineeId`; a company entry
 is removed by the list entry's wrapper `nominee.nomineeId`, not by `organizationId`. Cosign refuses investing firms
-in the companies list.
+in the companies list. A company entry's `nominee.imageUrl` is a blank `kind=person` image, so the row builds its logo with `organizationImage()`.
+A failed read or write forgets a cached list id only when `read_list` answers null for it (the list was deleted on
+the web); a rate limit or a network error keeps it. Sign out (`src/sign-out.tsx`) clears the tokens, the list ids, recent searches and the cached Cosign results on disk, then redraws the menu bar; view settings stay.
 
 ## UI conventions
 
@@ -50,8 +52,12 @@ in the companies list.
 - Each search command takes an optional `query` argument, which `SearchList`'s `initialQuery` runs once on open.
 - `src/components/SearchList.tsx` drives all three search commands: Enter to search, the bar clears and results stay
   so typing filters them, and the selected row's profile loads after a 250 ms debounce.
-- `src/components/view-actions.tsx` holds the "View" action section: Show/Hide Sidebar and Show/Hide Description.
+- `useDetailPane(key)` in `src/components/view-actions.tsx` gives a list its sidebar setting, the "View" action
+  section (Show/Hide Sidebar, Show/Hide Description) and `metadata()`, which drops the metadata in description mode.
   The description setting is one shared `useCachedState` key, so it applies in every list.
+- `src/components/entities.tsx` holds person and company content, actions and the pushed profile views;
+  `funding.tsx` and `jobs.tsx` hold Funding History and Open Roles. Sidebar content is a `Content` (`src/lib/meta.tsx`).
+- `npm test` runs the pure helpers' tests in `test/` (Node's test runner, no dependencies).
 - `src/components/investments.tsx` groups an investors list into one section per round, newest first, then by
   amount. Rows with no round go in a "Stage Unknown" section at the bottom.
 
@@ -63,9 +69,10 @@ in the companies list.
 - A request is identified by its `reviewKey`, not by `actorUserId`: a company sender and its operator can share a
   user id. A sender can recur across pages; `fetchNetworkRequests` keeps one row per `reviewKey` and merges the
   signal kinds. Accept takes `actorTarget.nomineeId` (a person) or `actorTarget.organizationId` (a company) and
-  answers with the new chat's `{ threadId, url }`. Archive sends `senderUserId` and `reviewKey`.
+  answers with the new chat's `{ threadId, url }`. Archive sends `senderUserId` and `reviewKey`. After either, the
+  requests are re-read; only Accept also re-reads conversations.
 - `src/inbox-menu-bar.tsx` refreshes every 10 minutes with one conversation read plus up to five request-page reads, and never reads thread bodies. Its count is
-  `unreadCount()` in `src/lib/inbox.ts`; message previews are cut with `truncate()` in `src/lib/format.ts`.
+  `unreadCount()` in `src/lib/inbox.ts`; message previews are cut with `truncate()` in `src/lib/format.ts`. A request row's subtitle is `requestSubtitle()` in `src/lib/inbox.ts`: the tagline up to its first " | " (the taglines seen so far are freeform text with hand-typed separators), else the first role whose date range ends in "Present".
 - Server text is untrusted. Links to Cosign go through `absolute()` (https on cosign.co only, else the home page); the one exception is an X
   profile link, which `xProfile()` builds from the handle with the handle URL-encoded. Names and
   other short text put into Markdown go through `escapeMd()`, which backslash-escapes ASCII punctuation so nothing
