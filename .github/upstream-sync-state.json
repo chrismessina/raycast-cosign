@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "08d90aa52c0d5ec305301e099eb3e7efe889c644",
-  "synced_at": "2026-11-08T18:13:05Z",
+  "upstream_commit": "8d846393b506d23c5d9ebae29bb35e3dc7653829",
+  "synced_at": "2026-11-17T18:47:09Z",
   "files": {
     ".gitignore": "c94d163709e4d28f2de2277a3fac6fa460d929a7",
     ".prettierrc": "3fb08e968934016b56874c5cb9171b9ac10e1ff3",
@@ -17,7 +17,7 @@
     "metadata/cosign-4.png": "7db09dd5cce46673edcfd58f6aea4ea54c0b2c8b",
     "metadata/cosign-5.png": "fdf4c60ab4f59b2f053f2c0d8e16ecab8b60f847",
     "package-lock.json": "a46e9c809080ff7c686f90c8f5a80da72048b7f4",
-    "package.json": "b91dfc2c2d96145d97c2ccafbc1f9fe7957f6870",
+    "package.json": "819f63ce87b62bff8dff34873d1ddeb4e5e9c6d4",
     "src/components/SearchList.tsx": "2cad2139f5993b2440d7dfe965a461bedfdfb554",
     "src/components/entities.tsx": "f2731c0633b91ba8ee3828926155729f8a1576df",
     "src/components/error-view.tsx": "43892d0f27424b8e7871b8395faf345308d8e984",
