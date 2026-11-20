@@ -95,4 +95,6 @@ Windows uses `Ctrl` in place of `⌘`.
 
 ---
 
+Want to contribute? See [CONTRIBUTING.md](https://github.com/chrismessina/raycast-cosign/blob/main/CONTRIBUTING.md).
+
 MIT © [Chris Messina](https://github.com/chrismessina)
